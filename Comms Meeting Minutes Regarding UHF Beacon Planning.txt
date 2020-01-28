@@ -1,0 +1,22 @@
+Meeting with Comms Team and Zac, Thursday 1/16/20
+
+Action Item: Figure out how to format the UHF beacon
+The most robust beacon is cw, using a unique morse identifier so that we can easily see it on the waterfall. We would have to figure out how to make the fsk radio do a cw beacon (fsk modulate all 0s or 1s, just turn it on/off for pauses). As a proof of concept, morse out a test word (someone's call sign, etc).
+Alternatively, a few hundred bits/second at fsk is slow enough to be visible on the waterfall as well. 300 baud fsk for beacon is good; any really low rate fsk with identifier and health data.
+
+Sequence of Satellite Events:
+After the cw beacon, switch over to LoRa packet with health data of the sat. After this transmission, listen for commands before going back to sleep.
+
+Examples of health data to include:
+up-time of satellite
+current attitude
+current power
+software state
+temperature
+
+Use Pack C-struct or Base 64 (turns binary data into ascii text, safer to random weirdness)
+All binary files are sent across the internet as Base64 files, as safe as plain text.
+This adds a tiny bit of overhead, but is way safer.
+Very standard, look for python libraries to do this. It could even be a python dictionary, and just serialize it out. We could also do JSON if we really wanted to.
+
+Test packets with SDR (SDR Sharp is the software for Windows) with a waterfall on a laptop.
