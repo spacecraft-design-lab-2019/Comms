@@ -1,0 +1,39 @@
+Notes for Testing the Radios:
+Use a handheld yagi & a script to run through and find the optimal LoRa settings
+-3 element hand-held Yagis are in the lab already, ~5-7 dbi
+  -Could also buy some from AeroAntenna
+-Take care to mount the satellite on wood handle or cardboard tube - no metal or humans!
+  -Has to be more than a wavelength above the ground
+-Get at least a km line of sight distance to get into the farfield
+
+Once the settings are dialed in, use a variable attenuator or many fixed attenuators to see what happens
+-Goal is to get a bit error rate / packet error rate
+
+Optimal final test would be to go to Mt. Hamilton - has line of sight to most of campus
+-No cell coverage, so find a way to communicate
+-Should be done when we have the finished satellite & the ground station functional
+
+After we get the optimal LoRa settings and a rough idea of the radio scaling, simulate the doppler shift in the lab
+-Expect a doppler shift of ~10 kHz
+-Doppler shift should be less of an issue when we have a higher LoRa frequency spread
+
+
+Notes for "Beeping Protocols":
+Send a CW beacon, then LoRa packet immediately after
+-Use ASK/OOK protocol to send CW signal (heads up - may have misspelled the protocols)
+-Send at least once a minute, probably want to make the beep frequency variable based on power voltage (low vs high power modes)
+-We'll probably be able to communicate with the sat for like 5-6 minutes each pass (1-2 minutes for the worst passes)
+
+
+Notes for Telemetry:
+Microcontroller & other chips may have temperature sensors built in - could add to telemetry
+
+ADCs are 12bit, so don't transmit a 32bit float for any value!
+-Use fixed point numbers - basically rescaling, so make sure we know the full possible range of values for each variable
+-Pack quaternions into 16 bit ints
+
+Satellite knows its own orbital position to high precision!
+-We should have it tell us precisely where it thinks it is
+  -Full state vector (13 numbers)
+
+Also want to keep track of number of resets
