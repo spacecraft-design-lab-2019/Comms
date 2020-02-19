@@ -38,6 +38,11 @@ rf_cs1 = digitalio.DigitalInOut(board.RF1_CS)
 rf_rst1 = digitalio.DigitalInOut(board.RF1_RST)
 rf_cs1.switch_to_output(value=True)
 rf_rst1.switch_to_output(value=True)
+
+rf_cs2 = digitalio.DigitalInOut(board.RF2_CS)
+rf_rst2 = digitalio.DigitalInOut(board.RF2_RST)
+rf_cs2.switch_to_output(value=True)
+rf_rst2.switch_to_output(value=True)
 # Setup SPI bus
 spi  = busio.SPI(board.SCK,MOSI=board.MOSI,MISO=board.MISO)
 # Initialize radio
@@ -51,6 +56,7 @@ radio1.coding_rate = cr
 radio1.spreading_factor = sf
 radio1.preamble_length = pl
 radio1.enable_crc = False
+
 count = 0
 
 dropvec = []
